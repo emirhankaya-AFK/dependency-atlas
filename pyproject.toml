@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dependency-atlas"
+version = "1.0.0"
+description = "Local-first Python dependency map, cycle detector and architecture health report"
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "DependencyAtlas contributors"}]
+keywords = ["python", "ast", "dependency-graph", "architecture", "cycles"]
+dependencies = [
+  "networkx>=3.1,<4",
+  "fastapi>=0.110,<1",
+  "uvicorn>=0.27,<1",
+  "python-multipart>=0.0.9,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.27,<1"]
+
+[project.scripts]
+dependency-atlas = "dependency_atlas.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dependency_atlas = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
